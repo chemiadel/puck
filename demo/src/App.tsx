@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./App.css";
-import Puck from "../../../src/index";
+import { Context } from "../../src";
 
 function App() {
   const [count, setCount] = useState(0);
+  const context = useContext(Context);
 
+  console.log({ context });
   return (
     <div className="App">
       <div>
@@ -13,7 +15,6 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <Puck />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
