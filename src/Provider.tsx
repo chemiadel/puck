@@ -1,43 +1,35 @@
-import React, { useContext, createContext, useState, useEffect } from "react";
+import React, { createContext, useState, Dispatch } from "react";
 
-interface IContext {
-  state: any;
+export interface IModal {
+  isOpen: boolean;
+  data?: any;
 }
 
-export const Context = createContext({});
+export interface IContext {
+  modals: Map<string, IModal>;
+  setModals: React.Dispatch<React.SetStateAction<Map<string, IModal>>>;
+}
+
+export const Context = createContext<IContext>({
+  modals: new Map(),
+  setModals: () => {},
+});
 
 interface IProps {
   children?: JSX.Element[] | JSX.Element;
 }
 
 export const Provider = (props: IProps) => {
-  const [modals, setModal] = useState(new Map());
-
-  const addModal = (key) => {
-    setModal((prev) => {
-      prev.has();
-    });
-  };
+  const [modals, setModals] = useState<Map<string, IModal>>(new Map());
 
   return (
-    <Context.Provider value={[modals, addModal]}>
+    <Context.Provider
+      value={{
+        modals,
+        setModals,
+      }}
+    >
       {props.children}
     </Context.Provider>
   );
-};
-
-export const useModal = (key: string) => {
-  const {
-    state,
-  }: {
-    state: [Map<any, any>, React.Dispatch<React.SetStateAction<Map<any, any>>>];
-  } = useContext(Context);
-
-  const modals = new Map();
-
-  useEffect(() => {
-    isExist = 
-  }, []);
-
-  const addModal = () => {};
 };
