@@ -1,31 +1,29 @@
-import { useState, useContext } from "react";
 import "./App.css";
-import { Context } from "../../src";
+import { usePuck, Context } from "../../src";
+import { useContext } from "react";
+import MyModal from "./components/Modal";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const context = useContext(Context);
+  const modal1 = usePuck(`modal1`);
 
-  console.log({ context });
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React + Puck</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <br />
+        <div className="fixed inset-0 flex items-center justify-center">
+          <button
+            type="button"
+            onClick={() => modal1.open()}
+            className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          >
+            Open modal 1
+          </button>
+        </div>
+        <br />
+        <button onClick={() => modal1.close()}>close A</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <MyModal />
     </div>
   );
 }
